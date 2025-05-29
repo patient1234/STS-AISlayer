@@ -1,0 +1,21 @@
+{
+  "aislayer:Config": {
+    "TEXT_DICT": {
+      "selectedPlatform_1": "启用平台1",
+      "apiKey_1": "平台api密钥",
+      "apiUrl_1": "平台请求地址",
+      "selectedModel_1_1": "启用模型1",
+      "model_1_1": "模型名称",
+      "selectedModel_1_2": "启用模型2",
+      "model_1_2": "模型名称",
+      "selectedPlatform_2": "启用平台2",
+      "apiKey_2": "平台api密钥",
+      "apiUrl_2": "平台请求地址",
+      "selectedModel_2_1": "启用模型1",
+      "model_2_1": "模型名称",
+      "selectedModel_2_2": "启用模型2",
+      "model_2_2": "模型名称",
+      "language": "语言"
+    }
+  }
+}

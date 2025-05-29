@@ -1,0 +1,9 @@
+{
+  "modid": "aislayer",
+  "name": "AI爬塔",
+  "author_list": ["河童"],
+  "description": "让AI来帮你打牌！",
+  "dependencies": ["basemod"],
+  "version": "0.0.1",
+  "sts_version": "04-13-2025"
+}

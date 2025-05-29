@@ -1,0 +1,21 @@
+{
+  "aislayer:Config": {
+    "TEXT_DICT": {
+      "selectedPlatform_1": "Enable platform 1",
+        "apiKey_1": "Platform API Key",
+        "apiUrl_1": "Platform Request URL",
+        "selectedModel_1_1": "Enable Model 1",
+          "model_1_1": "Model Name",
+        "selectedModel_1_2": "Enable Model 2",
+          "model_1_2": "Model Name",
+      "selectedPlatform_2": "Enable platform 2",
+        "apiKey_2": "Platform API Key",
+        "apiUrl_2": "Platform Request URL",
+        "selectedModel_2_1": "Enable Model 1",
+          "model_2_1": "Model Name",
+        "selectedModel_2_2": "Enable Model 2",
+          "model_2_2": "Model Name",
+      "language": "Language"
+    }
+  }
+}

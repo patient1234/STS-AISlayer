@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="com.evacipated.cardcrawl.modthespire.lib.SpireInitializer" />
+      <item index="1" class="java.lang.String" itemvalue="com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch" />
+      <item index="2" class="java.lang.String" itemvalue="com.evacipated.cardcrawl.modthespire.lib.SpirePatch" />
+      <item index="3" class="java.lang.String" itemvalue="com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch" />
+      <item index="4" class="java.lang.String" itemvalue="com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch" />
+    </list>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="PWA">
+    <option name="wasEnabledAtLeastOnce" value="true" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
