@@ -11,12 +11,16 @@ import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static aislayer.AISlayer.*;
 
 public class EnterRoomPatch {
+
+    public static final Logger logger = LogManager.getLogger(EnterRoomPatch.class.getName());
 
     private static void preEnter() {
         if (isAIStart()) {

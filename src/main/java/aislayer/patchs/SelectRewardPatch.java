@@ -2,6 +2,7 @@ package aislayer.patchs;
 
 import aislayer.utils.AIUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
@@ -49,6 +50,7 @@ public class SelectRewardPatch {
             }
     )
     public static class SelectRewardSetLabel {
+        @SpirePostfixPatch
         public static void Postfix() {
             patch();
         }
@@ -60,6 +62,7 @@ public class SelectRewardPatch {
             paramtypez = {}
     )
     public static class SelectReward {
+        @SpirePostfixPatch
         public static void Postfix() {
             patch();
         }

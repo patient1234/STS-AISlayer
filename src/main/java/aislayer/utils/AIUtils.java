@@ -22,6 +22,8 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,6 +37,8 @@ import java.util.ArrayList;
 import static aislayer.AISlayer.*;
 
 public class AIUtils {
+
+    public static final Logger logger = LogManager.getLogger(AIUtils.class.getName());
 
     public static JSONArray messagesArray = new JSONArray();
 

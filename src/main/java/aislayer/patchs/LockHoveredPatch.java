@@ -5,8 +5,8 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-
-import static aislayer.AISlayer.logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @SpirePatch(
         clz = InputHelper.class,
@@ -14,6 +14,7 @@ import static aislayer.AISlayer.logger;
 )
 public class LockHoveredPatch {
 
+    public static final Logger logger = LogManager.getLogger(LockHoveredPatch.class.getName());
     private static int lockedTime = 0;
 
     @SpirePostfixPatch

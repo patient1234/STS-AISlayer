@@ -6,8 +6,8 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
-import static aislayer.AISlayer.logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @SpirePatch(
         clz = AbstractPlayer.class,
@@ -15,6 +15,7 @@ import static aislayer.AISlayer.logger;
 )
 public class ExecuteSubscribePatch {
 
+    public static final Logger logger = LogManager.getLogger(ExecuteSubscribePatch.class.getName());
     private static AbstractGameAction action_pre = null;
 
     @SpirePostfixPatch

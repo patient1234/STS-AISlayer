@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,8 @@ import static aislayer.AISlayer.*;
         method = "open"
 )
 public class SelectRoomPatch {
+
+    public static final Logger logger = LogManager.getLogger(SelectRoomPatch.class.getName());
     @SpirePostfixPatch
     public static void Postfix() {
         if (
