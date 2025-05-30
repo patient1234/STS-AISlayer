@@ -9,8 +9,8 @@ import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.map.MapRoomNode;
@@ -45,6 +45,8 @@ public class AIUtils {
         Thread thread = new Thread(() -> {
             
             addToBot(new AIThinkAction());
+
+            logger.info("AI思考中...");
 
             JSONObject tool = AIUtils.getTool(apiKey, apiUrl, model, stringify(info));
 
@@ -294,7 +296,7 @@ public class AIUtils {
             while (!allDescriptions.isEmpty()) {
                 JSONObject unknownKeywordsTemp = getUnknownKeywords();
                 for (String keyword : unknownKeywordsTemp.keySet()) {
-                    unknownKeywords.put(keyword, unknownKeywordsTemp.get(keyword));
+                    unknownKeywords.put(keyword, unknownKeywordsTemp.getString(keyword));
                 }
             }
             if (!unknownKeywords.isEmpty()) {
@@ -437,15 +439,11 @@ public class AIUtils {
 
     private static JSONObject getUnknownKeywords() {
         JSONObject allKeywords = getAllKeywords();
-        String langPackDir = "localization" + File.separator + Settings.language.toString().toLowerCase();
-        String keywordsPath = langPackDir + File.separator + "keywords.json";
-        JSONObject keywords = new JSONObject(loadJson(keywordsPath)).getJSONObject("Game Dictionary");
         JSONObject unknownKeywords = new JSONObject();
         for (String keywordString : allKeywords.keySet()) {
             if (!knownKeywords.contains(keywordString)) {
                 knownKeywords.add(keywordString);
-                JSONObject keyword = keywords.getJSONObject(allKeywords.getString(keywordString));
-                unknownKeywords.put(keyword.getJSONArray("NAMES").getString(0), handleDescription(keyword.getString("DESCRIPTION")));
+                unknownKeywords.put(keywordString, handleDescription(allKeywords.getString(keywordString)));
             }
         }
         return unknownKeywords;
@@ -453,15 +451,10 @@ public class AIUtils {
 
     private static JSONObject getAllKeywords() {
         JSONObject allKeywords = new JSONObject();
-        String langPackDir = "localization" + File.separator + Settings.language.toString().toLowerCase();
-        String keywordsPath = langPackDir + File.separator + "keywords.json";
-        JSONObject keywords = new JSONObject(loadJson(keywordsPath)).getJSONObject("Game Dictionary");
-        for (String keyword : keywords.keySet()) {
-            if (keywords.get(keyword) instanceof JSONObject) {
-                String keywordString = keywords.getJSONObject(keyword).getJSONArray("NAMES").getString(0);
-                if (allDescriptions.toString().contains(keywordString)) {
-                    allKeywords.put(keywordString, keyword);
-                }
+        JSONObject keywords = new JSONObject(GameDictionary.keywords);
+        for (String keywordString : keywords.keySet()) {
+            if (allDescriptions.toString().contains(keywordString)) {
+                allKeywords.put(keywordString, keywords.getString(keywordString));
             }
         }
         allDescriptions.clear();

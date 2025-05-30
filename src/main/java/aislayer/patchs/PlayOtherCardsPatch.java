@@ -28,7 +28,7 @@ public class PlayOtherCardsPatch {
                         && isAIStart()
         ) {
 
-            String todo = "现在你可以使用药水、打出手牌" + AbstractDungeon.player.hand.group + "、结束回合";
+            String todo = "现在你可以使用药水、打出手牌、结束回合";
             AIUtils.action(getInfo(todo));
 
         }

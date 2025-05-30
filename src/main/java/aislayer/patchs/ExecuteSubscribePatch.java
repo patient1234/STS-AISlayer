@@ -1,6 +1,7 @@
 package aislayer.patchs;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,6 +17,7 @@ public class ExecuteSubscribePatch {
 
     private static AbstractGameAction action_pre = null;
 
+    @SpirePostfixPatch
     public static void Postfix() {
 
         GameActionManager am = AbstractDungeon.actionManager;

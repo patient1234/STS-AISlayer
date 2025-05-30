@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
+import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import org.json.JSONArray;
@@ -52,10 +53,10 @@ public class EnterRoomPatch {
             case "TreasureRoomBoss":
                 todo = "是否打开BOSS宝箱(BOSS遗物三选一)";
                 break;
+            case "NeowRoom":
             case "EventRoom":
             case "ShopRoom":
             case "RestRoom":
-            case "NeowRoom":
             default:
                 logger.info("当前房间: {}({})", roomName, roomNode);
                 break;
@@ -94,7 +95,7 @@ public class EnterRoomPatch {
         }
         @SpirePostfixPatch
         public static void Postfix() {
-            if (AbstractDungeon.nextRoom != null) {
+            if (AbstractDungeon.nextRoom != null && !(AbstractDungeon.getCurrRoom() instanceof NeowRoom)) {
                 postEnter(AbstractDungeon.nextRoom);
             } else {
                 postEnter(AbstractDungeon.getCurrMapNode());

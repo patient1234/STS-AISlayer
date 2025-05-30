@@ -94,10 +94,11 @@ public class AISlayer {
         playerJson.put("角色", AbstractDungeon.player.getCharacterString().NAMES[0]);
         playerJson.put("序号", 0);
         playerJson.put("金币", AbstractDungeon.player.gold);
-        playerJson.put("血量", AbstractDungeon.player.currentHealth + "/" + AbstractDungeon.player.maxHealth);
+        String playerBlockStatus = "";
         if (AbstractDungeon.player.currentBlock > 0) {
-            playerJson.put("格挡", AbstractDungeon.player.currentBlock);
+            playerBlockStatus = "(格挡: " + AbstractDungeon.player.currentBlock + ")";
         }
+        playerJson.put("血量", AbstractDungeon.player.currentHealth + "/" + AbstractDungeon.player.maxHealth + playerBlockStatus);
         playerJson.put("能量", EnergyPanel.getCurrentEnergy() + "/" + AbstractDungeon.player.energy.energyMaster);
         if (AbstractDungeon.player.stance.name != null) {
             playerJson.put("姿态", AbstractDungeon.player.stance.name);
@@ -245,10 +246,11 @@ public class AISlayer {
                     monsterJson.put("状态", "不可选中");
                 } else {
                     monsterJson.put("序号", indexMonster);
-                    monsterJson.put("血量", monster.currentHealth + "/" + monster.maxHealth);
+                    String monsterBlockStatus = "";
                     if (monster.currentBlock > 0) {
-                        monsterJson.put("格挡", monster.currentBlock);
+                        monsterBlockStatus = "(格挡: " + monster.currentBlock + ")";
                     }
+                    monsterJson.put("血量", monster.currentHealth + "/" + monster.maxHealth + monsterBlockStatus);
                 }
 
                 if (monster.currentHealth > 0 || monster.halfDead) {
@@ -346,7 +348,7 @@ public class AISlayer {
             case CURSE:
                 return "诅咒";
             default:
-                return "未知";
+                return type.name();
         }
     }
 
@@ -365,7 +367,7 @@ public class AISlayer {
             case COLORLESS:
                 return "无色";
             default:
-                return "未知";
+                return color.name();
         }
     }
 
@@ -382,7 +384,7 @@ public class AISlayer {
             case CURSE:
                 return "诅咒";
             default:
-                return "未知";
+                return rarity.name();
         }
     }
 
