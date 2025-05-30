@@ -4,6 +4,7 @@ import aislayer.actions.AIEndTurnAction;
 import aislayer.actions.AIThinkAction;
 import aislayer.actions.AIUseCardAction;
 import aislayer.actions.AIUsePotionAction;
+import aislayer.patchs.SelectCampfirePatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -21,6 +22,7 @@ import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
+import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,8 +51,6 @@ public class AIUtils {
         Thread thread = new Thread(() -> {
             
             addToBot(new AIThinkAction());
-
-            logger.info("AI思考中...");
 
             JSONObject tool = AIUtils.getTool(apiKey, apiUrl, model, stringify(info));
 
@@ -190,6 +190,20 @@ public class AIUtils {
                         AbstractDungeon.dungeonMapScreen.clicked = true;
                         InputHelper.justClickedLeft = true;
                         break;
+                    } else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.NONE) {
+                        String roomName = AbstractDungeon.getCurrRoom().getClass().getSimpleName();
+                        switch (roomName) {
+                            case "RestRoom":
+                                if (!selectIndexes.isEmpty()) {
+                                    int selectIndex = selectIndexes.getInt(0);
+                                    AbstractCampfireOption selectedOption = SelectCampfirePatch.buttons.get(selectIndex);
+                                    selectedOption.hb.clicked = true;
+                                    pressProceedButton();
+                                } else {
+                                    pressProceedButton();
+                                }
+                                break;
+                        }
                     }
                     break;
                 case "boolean":
@@ -353,6 +367,8 @@ public class AIUtils {
             return new JSONObject().put("error", e.getMessage());
         }
 
+        logger.info("AI思考中...");
+        
         // 创建连接
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

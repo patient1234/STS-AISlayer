@@ -15,8 +15,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,12 +38,6 @@ public class AISlayer {
     public static String apiKey;
     public static String apiUrl;
     public static String model;
-
-    public static final Logger logger = LogManager.getLogger(AISlayer.class.getName());
-
-    public AISlayer () {
-
-    }
 
     public static String handleDescription (AbstractCard card) {
         return handleDescription(card.rawDescription, card);

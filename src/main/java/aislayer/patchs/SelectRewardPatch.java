@@ -37,7 +37,7 @@ public class SelectRewardPatch {
                         break;
                 }
             }
-            String todo = "选择任意奖励(可以全选或者不选，建议都选上): " + todoArray;
+            String todo = "用select选择任意奖励(可以全选或者不选，建议都选上): " + todoArray;
             AIUtils.action(getInfo(todo));
         }
     }

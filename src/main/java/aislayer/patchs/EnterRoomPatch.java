@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.ShopRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,15 +53,16 @@ public class EnterRoomPatch {
         String todo = "";
         switch (roomName) {
             case "TreasureRoom":
-                todo = "是否打开宝箱(可能有遗物、蓝宝石)";
+                todo = "用boolean选择是否打开宝箱(可能有遗物、蓝宝石)";
                 break;
             case "TreasureRoomBoss":
-                todo = "是否打开BOSS宝箱(BOSS遗物三选一)";
+                todo = "用boolean选择是否打开BOSS宝箱(BOSS遗物三选一)";
+                break;
+            case "ShopRoom":
+                ((ShopRoom) room).merchant.hb.clicked = true;
                 break;
             case "NeowRoom":
             case "EventRoom":
-            case "ShopRoom":
-            case "RestRoom":
             default:
                 logger.info("当前房间: {}({})", roomName, roomNode);
                 break;
