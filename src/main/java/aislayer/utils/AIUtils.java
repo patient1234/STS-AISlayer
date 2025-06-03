@@ -7,6 +7,7 @@ import aislayer.actions.AIUsePotionAction;
 import aislayer.patchs.SelectCampfirePatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -23,6 +24,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import com.megacrit.cardcrawl.vfx.combat.LightBulbEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
@@ -78,6 +80,8 @@ public class AIUtils {
 
             String functionName = function.getString("name");
             JSONObject arguments = new JSONObject(function.getString("arguments"));
+
+            addToBot(new VFXAction(new LightBulbEffect(AbstractDungeon.player.hb), 0.5F));
 
             addToBot(new TalkAction(true, arguments.getString("reason"), 4.0F, 4.0F));
 
