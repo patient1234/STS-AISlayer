@@ -21,7 +21,6 @@ import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
-import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import org.apache.logging.log4j.LogManager;
@@ -208,19 +207,11 @@ public class AIUtils {
                     break;
                 case "boolean":
                     boolean select = arguments.getBoolean("boolean");
-                    while (true) {
-                        AbstractRoom room = AbstractDungeon.getCurrRoom();
-                        String roomName = room.getClass().getSimpleName();
-                        if (roomName.equals("TreasureRoomBoss")) {
-                            if (select) {
-                                AbstractChest chest = ((TreasureRoomBoss) room).chest;
-                                chest.isOpen = true;
-                                chest.open(true);
-                            } else {
-                                pressProceedButton();
-                            }
-                            break;
-                        } else if (roomName.equals("TreasureRoom")) {
+                    AbstractRoom room = AbstractDungeon.getCurrRoom();
+                    String roomName = room.getClass().getSimpleName();
+                    switch (roomName) {
+                        case "TreasureRoomBoss":
+                        case "TreasureRoom":
                             if (select) {
                                 AbstractChest chest = ((TreasureRoom) room).chest;
                                 chest.isOpen = true;
@@ -229,7 +220,6 @@ public class AIUtils {
                                 pressProceedButton();
                             }
                             break;
-                        }
                     }
                     break;
                 default:
@@ -244,6 +234,7 @@ public class AIUtils {
             Field hbField = AbstractDungeon.overlayMenu.proceedButton.getClass().getDeclaredField("hb");
             hbField.setAccessible(true);
             Hitbox hb = (Hitbox) hbField.get(AbstractDungeon.overlayMenu.proceedButton);
+            AbstractDungeon.overlayMenu.proceedButton.show();
             hb.clicked = true;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             logger.error("无法访问 proceedButton 的 hb 字段", e);

@@ -1,6 +1,5 @@
 package aislayer.patchs;
 
-import aislayer.AISlayer;
 import aislayer.utils.AIUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -11,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+import static aislayer.AISlayer.*;
 
 @SpirePatch(
         clz = CampfireUI.class,
@@ -25,6 +26,7 @@ public class SelectCampfirePatch {
         ArrayList<String> Campfire = new ArrayList<>();
         Field buttonsField = CampfireUI.class.getDeclaredField("buttons");
         buttonsField.setAccessible(true);
+        //noinspection unchecked
         buttons = (ArrayList<AbstractCampfireOption>) buttonsField.get(campfireUI);
         for (AbstractCampfireOption button : buttons) {
             Field labelField = AbstractCampfireOption.class.getDeclaredField("label");
@@ -45,11 +47,11 @@ public class SelectCampfirePatch {
 
     @SpirePostfixPatch
     public static void Postfix(CampfireUI __instance) {
-        if (AISlayer.isAIStart()) {
+        if (isAIStart()) {
             try {
                 ArrayList<String> Campfire = getCampfire(__instance);
                 String todo = "用select选择一个火堆行为: " + Campfire;
-                AIUtils.action(AISlayer.getInfo(todo));
+                AIUtils.action(getInfo(todo));
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 logger.error("获取CampfireUI按钮失败", e);
             }

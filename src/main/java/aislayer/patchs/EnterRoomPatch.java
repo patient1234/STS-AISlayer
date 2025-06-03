@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.neow.NeowRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.rooms.ShopRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static aislayer.AISlayer.*;
+import static com.megacrit.cardcrawl.shop.Merchant.NAMES;
 
 public class EnterRoomPatch {
 
@@ -34,7 +34,7 @@ public class EnterRoomPatch {
             AISlayer.allPotions.clear();
             AISlayer.allRelics.clear();
 
-            String systemMessage = "你是一个专业的杀戮尖塔高手玩家，请根据游戏信息和信息里面当前你需要做的事直接执行你的下一步操作，任何操作都只能调用函数工具，禁止输出任何其他内容，如果要回复文字内容就使用" + ConfigPanel.language + "语言，比如行动理由，注意遵守游戏规则，有策略有头脑地完成这局游戏。如果要击杀最终BOSS心脏需要在第三章结束前拿到红绿蓝三种钥匙，红宝石在火堆，蓝宝石在非BOSS宝箱，绿宝石在每一层的加强精英战利品。";
+            String systemMessage = "你是一个专业的杀戮尖塔高手玩家，请根据游戏信息和信息里面当前你需要做的事直接执行你的下一步操作，任何操作都只能调用函数工具，禁止输出任何其他内容，如果要回复文字内容就使用" + ConfigPanel.language + "语言，比如行动理由，注意遵守游戏规则，有策略有头脑地完成这局游戏，每一步行动要有规划，不能仅仅看当前这一步，要考虑后面。如果要击杀最终BOSS心脏需要在第三章结束前拿到红绿蓝三种钥匙，红宝石在火堆，蓝宝石在非BOSS宝箱，绿宝石在每一层的加强精英战利品。";
 
             AIUtils.messagesArray = new JSONArray();
             JSONObject msg = new JSONObject();
@@ -48,27 +48,30 @@ public class EnterRoomPatch {
     }
 
     private  static void postEnter(MapRoomNode roomNode) {
-        AbstractRoom room = roomNode.getRoom();
-        String roomName = room.getClass().getSimpleName();
-        String todo = "";
-        switch (roomName) {
-            case "TreasureRoom":
-                todo = "用boolean选择是否打开宝箱(可能有遗物、蓝宝石)";
-                break;
-            case "TreasureRoomBoss":
-                todo = "用boolean选择是否打开BOSS宝箱(BOSS遗物三选一)";
-                break;
-            case "ShopRoom":
-                ((ShopRoom) room).merchant.hb.clicked = true;
-                break;
-            case "NeowRoom":
-            case "EventRoom":
-            default:
-                logger.info("当前房间: {}({})", roomName, roomNode);
-                break;
-        }
-        if (!todo.isEmpty()) {
-            AIUtils.action(getInfo(todo));
+        if (isAIStart()) {
+            AbstractRoom room = roomNode.getRoom();
+            String roomName = room.getClass().getSimpleName();
+            String todo = "";
+            switch (roomName) {
+                case "TreasureRoom":
+                    todo = "用boolean选择是否打开宝箱(可能有遗物、蓝宝石)";
+                    break;
+                case "TreasureRoomBoss":
+                    todo = "用boolean选择是否打开BOSS宝箱(BOSS遗物三选一)";
+                    break;
+                case "ShopRoom":
+                    AbstractDungeon.overlayMenu.proceedButton.setLabel(NAMES[0]);
+                    AbstractDungeon.shopScreen.open();
+                    break;
+                case "NeowRoom":
+                case "EventRoom":
+                default:
+                    logger.info("当前房间: {}({})", roomName, roomNode);
+                    break;
+            }
+            if (!todo.isEmpty()) {
+                AIUtils.action(getInfo(todo));
+            }
         }
     }
 

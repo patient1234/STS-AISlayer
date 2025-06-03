@@ -4,6 +4,6 @@
   "author_list": ["河童"],
   "description": "让AI来帮你打牌！",
   "dependencies": ["basemod"],
-  "version": "0.0.1",
-  "sts_version": "04-13-2025"
+  "version": "0.3.1",
+  "sts_version": "06-3-2025"
 }
