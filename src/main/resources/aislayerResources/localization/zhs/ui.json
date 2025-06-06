@@ -15,7 +15,8 @@
       "model_2_1": "模型名称",
       "selectedModel_2_2": "启用模型2",
       "model_2_2": "模型名称",
-      "language": "语言"
+      "language": "语言",
+      "handleApiUrl": "是否自动处理请求地址(如果关闭，输入以http://开头并以completions结尾的地址)"
     }
   }
 }

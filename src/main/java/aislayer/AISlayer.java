@@ -384,7 +384,11 @@ public class AISlayer {
 
         if (ConfigPanel.selectedPlatform_1) {
             AISlayer.apiKey = ConfigPanel.apiKey_1;
-            AISlayer.apiUrl = handleApiUrl(ConfigPanel.apiUrl_1);
+            if (ConfigPanel.handleApiUrl) {
+                AISlayer.apiUrl = handleApiUrl(ConfigPanel.apiUrl_1);
+            } else {
+                AISlayer.apiUrl = ConfigPanel.apiUrl_1;
+            }
             if (ConfigPanel.selectedModel_1_1) {
                 AISlayer.model = ConfigPanel.model_1_1;
             } else if (ConfigPanel.selectedModel_1_2) {
@@ -394,7 +398,11 @@ public class AISlayer {
             }
         } else if (ConfigPanel.selectedPlatform_2) {
             AISlayer.apiKey = ConfigPanel.apiKey_2;
-            AISlayer.apiUrl = handleApiUrl(ConfigPanel.apiUrl_2);
+            if (ConfigPanel.handleApiUrl) {
+                AISlayer.apiUrl = handleApiUrl(ConfigPanel.apiUrl_2);
+            } else {
+                AISlayer.apiUrl = ConfigPanel.apiUrl_2;
+            }
             if (ConfigPanel.selectedModel_2_1) {
                 AISlayer.model = ConfigPanel.model_2_1;
             } else if (ConfigPanel.selectedModel_2_2) {

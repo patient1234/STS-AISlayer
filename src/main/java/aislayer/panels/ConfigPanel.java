@@ -24,13 +24,14 @@ public class ConfigPanel extends EasyConfigPanel {
 
     public static boolean selectedPlatform_2 = false;
     public static String apiKey_2 = "sk-...";
-    public static String apiUrl_2 = "api.openai.com/v3";
+    public static String apiUrl_2 = "api.openai.com/v1";
     public static boolean selectedModel_2_1 = false;
     public static String model_2_1 = "gpt-3.5-turbo";
     public static boolean selectedModel_2_2 = false;
     public static String model_2_2 = "gpt-4";
 
     public static String language = "中文";
+    public static boolean handleApiUrl = true;
 
     public ConfigPanel() {
         super("aislayer", getUIStrings(), "config");

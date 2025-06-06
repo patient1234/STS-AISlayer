@@ -15,7 +15,8 @@
           "model_2_1": "Model Name",
         "selectedModel_2_2": "Enable Model 2",
           "model_2_2": "Model Name",
-      "language": "Language"
+      "language": "Language",
+      "handleApiUrl": "If Auto Handle API URL(If disabled, input URL starting with http:// and ending with completions)"
     }
   }
 }
